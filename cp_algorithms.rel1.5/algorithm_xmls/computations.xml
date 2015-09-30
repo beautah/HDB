@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <LoadingApplication name="compproc">
+    <Comment>Main background computation process</Comment>
+  </LoadingApplication>
+  <LoadingApplication name="utility">
+    <Comment>Various Tools</Comment>
+  </LoadingApplication>
+  <Algorithm name="HourlyDelta">
+    <Comment>
+      Output is hourly delta of input. Delete output if input was deleted.
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.CopyAlgorithm</ExecClass>
+    <AlgoParm roleName="input">
+      <ParmType>idh</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="DisAggregate">
+    <Comment>
+      Dis-aggregates by spreading out the input values to the outputs in various
+      ways (fill, interpolate, split). 
+The interval of the input should always
+      be equal to, or longer than, the output. 
+Example: Input is daily, output
+      is hour. 24 output values are written covering the period of each input. 
+      The &apos;method&apos; property determines how each output period is
+      determined: 
+&lt;ul&gt;
+  &lt;li&gt;fill (default) - Each output is the
+      same as the input covering the period. &lt;/li&gt;
+  &lt;li&gt;interp -
+      Determine the output by interpolating between input values&lt;/li&gt;
+ 
+      &lt;li&gt;split - Divide the input equally between the outputs for the
+      period.&lt;/li&gt;
+&lt;/ul&gt;
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.DisAggregate</ExecClass>
+    <AlgoProperty name="method">fill</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="Copy">
+    <Comment>
+      Copy input parameter to output. Delete output if input was deleted.
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.CopyAlgorithm</ExecClass>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="RdbRating">
+    <Comment>
+      Implements rating table computations. Holds the lookup table &amp; shift
+      values. Independent (e.g. STAGE) value is called &quot;indep&quot;.
+      Dependent (e.g. FLOW) is called &quot;dep&quot;. &lt;p&gt;Properties
+      include: &lt;ul&gt; &lt;li&gt;applyShifts - true if you want algorithm to
+      apply shifts. Usually unnecessary because RDB files are expanded.
+      &lt;/li&gt; &lt;li&gt;tableType - default=&quot;RDB&quot;. Also supports
+      &quot;SimpleTable&quot;. &lt;/li&gt; &lt;li&gt;tableDir - Directory
+      containing table files.&lt;/li&gt; &lt;/ul&gt;
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.RdbRating</ExecClass>
+    <AlgoProperty name="exceedUpperBound">false</AlgoProperty>
+    <AlgoProperty name="applyShifts">false</AlgoProperty>
+    <AlgoProperty name="exceedLowerBound">false</AlgoProperty>
+    <AlgoProperty name="tableDir">$DECODES_INSTALL_DIR/rdb</AlgoProperty>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="ScalerAdder">
+    <Comment>
+      Takes up to 5 input values labeled input1 ... input5. Multiplies them by
+      coefficients supplied in properties coeff1 ... coeff5. Adds them together
+      and produces a single output labeled &apos;output&apos;. Values not
+      assigned by computation are ignored. All coefficients default to 1.0 if
+      not supplied.
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.ScalerAdder</ExecClass>
+    <AlgoProperty name="input2_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input5_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input3_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input1_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff5">1.0</AlgoProperty>
+    <AlgoProperty name="coeff4">1.0</AlgoProperty>
+    <AlgoProperty name="coeff3">1.0</AlgoProperty>
+    <AlgoProperty name="coeff2">1.0</AlgoProperty>
+    <AlgoProperty name="input4_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff1">1.0</AlgoProperty>
+    <AlgoParm roleName="input1">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input2">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input3">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input4">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input5">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="Average">
+    <Comment>
+      Average a single parameter with role name &apos;input. Output role name
+      &apos;average&apos;.
+The averaging period is automatically determined by
+      the interval of the &apos;average&apos; parameter.
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.AverageAlgorithm</ExecClass>
+    <AlgoProperty name="minSamplesNeeded">13</AlgoProperty>
+    <AlgoParm roleName="average">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbACAPSRating">
+    <Comment>
+      Implements the ACAPS rating algorithm from tables in the database.
+      Independent value is called &quot;elevation&quot;.
+Dependent values are
+      &quot;storage&quot; and &quot;area&quot;.
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbACAPSRating</ExecClass>
+    <AlgoParm roleName="elevation">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="storage">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="area">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbElevationVolume">
+    <Comment>
+      Implements elevation volume table lookups in the database.
+Independent
+      (e.g. Elevation) value is called &quot;indep&quot;.
+Dependent (e.g.
+      Storage) is called &quot;dep&quot;.
+&lt;p&gt;Properties include: 
+      &lt;ul&gt; 
+&lt;li&gt;ratingType - default=&quot;Elevation Volume&quot;.
+      Supports several others in HDB_RATING_TYPE
+&lt;/li&gt;
+&lt;/ul&gt;
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbRating</ExecClass>
+    <AlgoProperty name="exceedUpperBound">false</AlgoProperty>
+    <AlgoProperty name="applyShifts">false</AlgoProperty>
+    <AlgoProperty name="exceedLowerBound">false</AlgoProperty>
+    <AlgoProperty name="ratingType">Elevation Volume</AlgoProperty>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbEvaporation">
+    <Comment>
+      Implements an evaporation computation
+Primary value is &quot;area&quot;.
+      Really need average area, so two choices for second input:
+prevArea =
+      previous EOP area or diffArea = deltaArea
+For now, chose prevArea.
+Third
+      input is evapCoeff. This is a SDI pointer to either
+a coefficient
+      timeseries, or to lookup a coefficient from the stat tables
+Output is
+      evaporation as a volume.
+&lt;p&gt;Properties include: 
+&lt;ul&gt; 
+      &lt;li&gt;ignoreTimeSeries - completely ignore changes to any timeseries
+      value from evapCoeff, and always lookup from database.
+&lt;/li&gt;
+      &lt;/ul&gt;
+
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbEvaporation</ExecClass>
+    <AlgoProperty name="ignoreTimeSeries">true</AlgoProperty>
+    <AlgoProperty name="evapCoeff_MISSING">ignore</AlgoProperty>
+    <AlgoParm roleName="area">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evapCoeff">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbRating">
+    <Comment>
+      Implements rating table lookups in the database.
+Independent (e.g. STAGE)
+      value is called &quot;indep&quot;.
+Dependent (e.g. FLOW) is called
+      &quot;dep&quot;.
+&lt;p&gt;Properties include: 
+&lt;ul&gt; 
+      &lt;li&gt;ratingType - default=&quot;Shift Adjusted Stage Flow&quot;.
+      Supports several others in HDB_RATING_TYPE
+&lt;/li&gt;
+&lt;/ul&gt;
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbRating</ExecClass>
+    <AlgoProperty name="exceedUpperBound">false</AlgoProperty>
+    <AlgoProperty name="applyShifts">false</AlgoProperty>
+    <AlgoProperty name="exceedLowerBound">false</AlgoProperty>
+    <AlgoProperty name="ratingType">Shift Adjusted Stage Flow</AlgoProperty>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbReservoirMassBalance">
+    <Comment>
+      Implements a reservoir mass balance
+&lt;p&gt;Inputs are:
+&lt;ul&gt;
+      &lt;li&gt;dStor (delta Storage)&lt;/li&gt;
+&lt;li&gt;rel (total release
+      from reservoir)&lt;/li&gt;
+&lt;li&gt;bStor (delta Bank Storage)&lt;/li&gt;
+      &lt;li&gt;evap (net reservoir evaporation)&lt;/li&gt;
+&lt;li&gt;div
+      (diversion)&lt;/li&gt;
+&lt;/ul&gt;
+Any of these can be set to be optional
+      by setting a property.
+Output is inflow.
+Units must be consistent.
+
+      &lt;p&gt;Properties include: 
+&lt;ul&gt; 
+&lt;li&gt;dBStor_MISSING -
+      whether delta bank storage is required (set to fail)
+&lt;/li&gt;
+      &lt;li&gt;evap_MISSING - whether evaporation is required (set to fail)
+      &lt;/li&gt;
+&lt;li&gt;div_MISSING - whether diversion is required (set to
+      fail)
+&lt;/li&gt;
+&lt;/ul&gt;
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbReservoirMassBalance</ExecClass>
+    <AlgoProperty name="dBStor_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="div_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="evap_MISSING">fail</AlgoProperty>
+    <AlgoParm roleName="dStor">
+      <ParmType>id</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="rel">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dBStor">
+      <ParmType>id</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="div">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="inflow">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="HdbShiftRating">
+    <Comment>
+      Implements the Shift and Rating Table Lookups from the database.
+      Independent value is called &quot;indep&quot;.
+Dependent values are
+      &quot;shift&quot; and &quot;dep&quot;.
+Shift may or may not be stored in
+      the database
+
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.HdbShiftRating</ExecClass>
+    <AlgoProperty name="singleShift">0</AlgoProperty>
+    <AlgoProperty name="variableShift">false</AlgoProperty>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="shift">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

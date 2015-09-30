@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="EOPInterpAlg">
+    <Comment>
+      Type a javadoc-style comment describing the algorithm class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.EOPInterpAlg</ExecClass>
+    <AlgoProperty name="desired_window_period">0</AlgoProperty>
+    <AlgoProperty name="req_window_period">0</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

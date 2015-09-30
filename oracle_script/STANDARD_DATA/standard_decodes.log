@@ -1,0 +1,19 @@
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+Export file created by EXPORT:V09.02.00 via conventional path
+
+Warning: the objects were exported by STANDARD, not by you
+
+import done in US7ASCII character set and AL16UTF16 NCHAR character set
+. importing STANDARD_DECODES's objects into STANDARD_DECODES
+. . importing table             "DATAPRESENTATION"        131 rows imported
+. . importing table                     "DATATYPE"        605 rows imported
+. . importing table          "DATATYPEEQUIVALENCE"         12 rows imported
+. . importing table       "DECODESDATABASEVERSION"          1 rows imported
+. . importing table                         "ENUM"         15 rows imported
+. . importing table                    "ENUMVALUE"         73 rows imported
+. . importing table            "PRESENTATIONGROUP"          1 rows imported
+. . importing table                "UNITCONVERTER"         77 rows imported
+Import terminated successfully without warnings.

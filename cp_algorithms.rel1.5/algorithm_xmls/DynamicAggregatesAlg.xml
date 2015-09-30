@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="DynamicAggregatesAlg">
+    <Comment>
+      This algorithm is for aggregations across HDB expected intervals. 
+Will do
+      any ORACLE based aggregation that takes only the one value 
+as the
+      function  ie MAX(value)  so this algorithm can presently do:
+
+min, max,
+      avg, count, sum, median, stddev, and variance
+
+specify the aggregate they
+      desire by stating the oracle 
+function in the aggregate_name property  ie
+      aggregate_name=sum
+
+MIN_VALUES_REQUIRED: setting to zero means use max
+      number observations for interval 
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.DynamicAggregatesAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="aggregate_name">NONE</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

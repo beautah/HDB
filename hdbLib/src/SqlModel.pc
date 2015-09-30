@@ -52,8 +52,6 @@ EXEC SQL INCLUDE SQLCA;
 #include <dbutils.h>
 #include <utils.h>
 
-#define HYD_IND_LENGTH 32+1 /* size of column in DB */
-
 #define FUNC_NAME    "SqlGetModelId"
 
 /*
@@ -145,7 +143,7 @@ int SqlGetModelRunId (ID modelId, char *modelRunName, SQL_DATE runDate,
     ID sqlModelId = modelId;
     char *sqlModelRunName;
     SQL_DATE sqlRunDate;
-    char hydInd[HYD_IND_LENGTH];
+    char *hydInd;
     char *sqlModelType;
     SQL_DATE sqlStartDate, 
              sqlEndDate;
@@ -176,7 +174,7 @@ int SqlGetModelRunId (ID modelId, char *modelRunName, SQL_DATE runDate,
   if (probability == NA)
     probInd = NULL_IND;
   else
-    snprintf (hydInd,HYD_IND_LENGTH,"%d",probability);
+    sprintf (hydInd,"%d",probability);
 
   if (!modelType)
   {

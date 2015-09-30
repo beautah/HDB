@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="FLGUUnreg">
+    <Comment>
+      Flaming Gorge Unregulated Inflow Computation
+Takes Fontenelle Delta
+      Storage and Evap from t-1 and
+adds them to Flaming Gorge Inflow to get
+      Unregulated Inflow
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.FLGUUnreg</ExecClass>
+    <AlgoProperty name="FTRWDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="FLGUInflow_missing">fail</AlgoProperty>
+    <AlgoProperty name="FTRWEvap_missing">fail</AlgoProperty>
+    <AlgoParm roleName="FTRWDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FTRWEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FLGUInflow">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="unreg">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

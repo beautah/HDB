@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="SideInflowAlg">
+    <Comment>
+      This algorithm is an Side Inflow mass balance calculation for inflow as:  
+      Delta Storage - Total Release Above + Total Release Below + evaporation 
+
+      If inputs Delta Storage or Total Release Above or Total Release Below
+or 
+      ithe Evap do not exist or have been deleted and the 
+Delta_STORAGE_MISSING
+      or the TOTAL_REL_ABOVE_MISSING or EVAP_MISSING,
+or TOTAL_REL_BELOW_MISSING
+      properties are set to &quot;fail&quot; then the 
+inflow will not be
+      calculated and/or the inflow will be deleted.
+
+If all of the inputs do not
+      exist because of a delete the inflow will 
+be deleted if the output exists
+      regardless of the property settings.
+
+This algorithm written by M. Bogner,
+      August 2008
+Modified by M. Bogner May 2009 to add additional delete logic
+      and version control
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.SideInflowAlg</ExecClass>
+    <AlgoProperty name="total_rel_above_missing">ignore</AlgoProperty>
+    <AlgoProperty name="delta_storage_missing">ignore</AlgoProperty>
+    <AlgoProperty name="total_rel_below_missing">ignore</AlgoProperty>
+    <AlgoProperty name="evap_missing">ignore</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="total_rel_above">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="total_rel_below">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="delta_storage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="side_inflow">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

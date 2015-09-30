@@ -1,3 +1,0 @@
-APPDIR = $(HDB_ENV)/codwr2hdb
-SRCDIR = $(APPDIR)/src
-

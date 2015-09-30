@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="InflowBasicAlg">
+    <Comment>
+      This algorithm is an Basic mass balance calculation for inflow as:  
+Delta
+      Storage + Total Release 
+
+If inputs Delta Storage or Total Release do not
+      exist or have been
+deleted and the Delta_STORAGE_MISSING or the
+      TOTAL_RELEASE_MISSING
+properties are set to &quot;fail&quot; then the
+      inflow will not be calculated
+and/or the inflow will be deleted.
+
+If all
+      of the inputs do not exist because of a delete the inflow will 
+be deleted
+      if the output exists regardless of the property settings.
+
+This algorithm
+      written by M. Bogner, August 2008
+Modified by M. Bogner May 2009 to add
+      additional delete logic and version control
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.InflowBasicAlg</ExecClass>
+    <AlgoProperty name="delta_storage_missing">ignore</AlgoProperty>
+    <AlgoProperty name="total_release_missing">ignore</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="total_release">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="delta_storage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="inflow">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

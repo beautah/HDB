@@ -8,7 +8,7 @@ drop user wa_user cascade;
 
 create user wa_user identified by wa_user
 default tablespace HDB_data quota unlimited on HDB_data
-temporary tablespace HDB_temp quota unlimited on HDB_temp;
+temporary tablespace HDB_temp;
 
 grant wa_role to wa_user;
 alter user wa_user default role wa_role;

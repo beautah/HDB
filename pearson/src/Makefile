@@ -1,5 +1,5 @@
 # pearson makefile
-# $Id$
+# $Id: Makefile,v 1.2 2004/12/28 20:39:27 hdba Exp $
 
 include ../../Environ
 

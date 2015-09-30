@@ -1,9 +1,9 @@
-# basins makefile64
-# $Id$
+# basins makefile
+# $Id: Makefile,v 1.2 2004/12/28 20:31:28 hdba Exp $
 
-include ../../Environ.10
+include ../../Environ
 
-OBJDIR = $(HDB_ENV)/basins/obj64
+OBJDIR = $(HDB_ENV)/basins/obj
 INCLUDES= -I$(HDB_APP_INCLUDE)
 LIBS= $(HDB_LIBS) -lm -ldl
 CFLAGS = -ansi -Wall -g -DANSIPROTO $(INCLUDES)

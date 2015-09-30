@@ -6,7 +6,8 @@
 @wa_views &1
 @wa_sequences &1
 @wa_triggers &1
-@wa_data &1
+/* the wa data was removed because the data inserted by this dml is already in the tables from the standard data load  */
+/*  @wa_data &1  */
 
 
 quit

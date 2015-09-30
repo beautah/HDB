@@ -1,0 +1,50 @@
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+Export file created by EXPORT:V09.02.00 via conventional path
+
+Warning: the objects were exported by STANDARD, not by you
+
+import done in US7ASCII character set and AL16UTF16 NCHAR character set
+. importing STANDARD's objects into STANDARD
+. . importing table                 "CP_ALGORITHM"         26 rows imported
+. . importing table             "CP_ALGO_PROPERTY"         93 rows imported
+. . importing table              "CP_ALGO_TS_PARM"         84 rows imported
+. . importing table               "CP_COMPUTATION"         20 rows imported
+. . importing table                     "HDB_AGEN"         46 rows imported
+. . importing table                     "HDB_ATTR"        375 rows imported
+. . importing table        "HDB_COLLECTION_SYSTEM"         16 rows imported
+. . importing table                  "HDB_DAMTYPE"         12 rows imported
+. . importing table                 "HDB_DATATYPE"        485 rows imported
+. . importing table         "HDB_DATATYPE_FEATURE"        273 rows imported
+. . importing table            "HDB_DATATYPE_TYPE"          6 rows imported
+. . importing table              "HDB_DATA_SOURCE"         14 rows imported
+. . importing table           "HDB_DATE_TIME_UNIT"          6 rows imported
+. . importing table          "HDB_DERIVATION_FLAG"          5 rows imported
+. . importing table                  "HDB_DIVTYPE"          2 rows imported
+. . importing table             "HDB_DMI_UNIT_MAP"         27 rows imported
+. . importing table            "HDB_EXT_DATA_CODE"         42 rows imported
+. . importing table        "HDB_EXT_DATA_CODE_SYS"          4 rows imported
+. . importing table        "HDB_EXT_SITE_CODE_SYS"          3 rows imported
+. . importing table                  "HDB_FEATURE"        109 rows imported
+. . importing table            "HDB_FEATURE_CLASS"          5 rows imported
+. . importing table         "HDB_FEATURE_PROPERTY"        162 rows imported
+. . importing table                 "HDB_GAGETYPE"          0 rows imported
+. . importing table                 "HDB_INTERVAL"          8 rows imported
+. . importing table      "HDB_LOADING_APPLICATION"         37 rows imported
+. . importing table                   "HDB_METHOD"         21 rows imported
+. . importing table             "HDB_METHOD_CLASS"         16 rows imported
+. . importing table        "HDB_METHOD_CLASS_TYPE"          4 rows imported
+. . importing table                "HDB_MODELTYPE"          3 rows imported
+. . importing table               "HDB_OBJECTTYPE"         30 rows imported
+. . importing table                 "HDB_OPERATOR"          4 rows imported
+. . importing table           "HDB_OVERWRITE_FLAG"          2 rows imported
+. . importing table                 "HDB_PROPERTY"          3 rows imported
+. . importing table         "HDB_RATING_ALGORITHM"          4 rows imported
+. . importing table              "HDB_RATING_TYPE"          8 rows imported
+. . importing table                    "HDB_STATE"         50 rows imported
+. . importing table                 "HDB_USBR_OFF"         15 rows imported
+. . importing table               "HDB_VALIDATION"         13 rows imported
+. . importing table    "REF_INTERVAL_REDEFINITION"          1 rows imported
+Import terminated successfully without warnings.

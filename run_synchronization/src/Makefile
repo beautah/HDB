@@ -1,10 +1,10 @@
 # run_synchronization makefile
-# $Id$
+# $Id: Makefile,v 1.2 2005/05/11 20:11:13 uchdba Exp $
 
 include ../../Environ
 
 OBJDIR = $(HDB_ENV)/run_synchronization/obj
-INCLUDES = -I$(HDB_APP_INCLUDE) 
+INCLUDES = -I$(HDB_APP_INCLUDE) -I$(TK_INCLUDES) 
 LIBS = $(HDB_LIBS) -ldl -lm 
 CFLAGS = -ansi -Wall -g -DANSIPROTO $(INCLUDES)
 

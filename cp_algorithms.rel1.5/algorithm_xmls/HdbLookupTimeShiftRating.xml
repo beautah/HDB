@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="HdbLookupTimeShiftRating">
+    <Comment>
+      Implements the Shift and Rating Table Lookups from the database.
+      Independent value is called &quot;indep&quot;.
+Dependent values are
+      &quot;shift&quot; and &quot;dep&quot;.
+Shift may or may not be stored in
+      the database
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.HdbLookupTimeShiftRating</ExecClass>
+    <AlgoProperty name="singleShift">0</AlgoProperty>
+    <AlgoProperty name="variableShift">false</AlgoProperty>
+    <AlgoProperty name="shiftTableType">Time Interpolated Shift</AlgoProperty>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="shift">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

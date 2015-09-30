@@ -1,9 +1,9 @@
-# hdbLib makefile64
-# $Id$:
+# hdbLib makefile
+# $Id: Makefile,v 1.2 2004/04/28 19:19:06 cmarra Exp $:
 
-include ../../Environ.10
+include ../../Environ
 
-OBJDIR = $(HDB_ENV)/hdbLib/obj64
+OBJDIR = $(HDB_ENV)/hdbLib/obj
 INCLUDES = -I$(HDB_APP_INCLUDE)
 LIBS = $(HDB_LIBS) -lm -ldl
 CFLAGS = -ansi -Wall -c -g -DANSIPROTO $(INCLUDES)
@@ -120,7 +120,7 @@ $(OBJDIR)/SqlModel.o: \
 	$(GLOBAL_INCLUDE) \
 	SqlModel.pc \
 	$(HDB_APP_INCLUDE)/utils.h
-	proc code=ansi_c CHAR_MAP=string sqlcheck=semantics userid=$(DBA)/$(DBA_PASSWD) iname=SqlModel.pc include=$(HDB_APP_INCLUDE)
+	proc code=ansi_c iname=SqlModel.pc include=$(HDB_APP_INCLUDE)
 	$(CC) $(CFLAGS)  SqlModel.c -o $@
 
 $(OBJDIR)/SqlCount.o: \

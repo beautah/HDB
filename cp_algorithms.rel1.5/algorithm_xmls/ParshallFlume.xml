@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="ParshallFlume">
+    <Comment>
+         Computes flow through a Parshall Flume according to the 
+  width
+      property value assigned to the calculation using this
+  algorithm and the
+      logic:
+
+   If width is greater than 9.0 then:
+   Area = 3.6875 * width +
+      2.5
+   Flow = Area * (stage ^ 1.6)
+
+   If width is less than or equal to
+      9.0 then:
+   Flow = 4 * width * stage ^ (1.522 * (width ^ 0.026)) 
+
+  
+      Required Properties:  width (ie width=7.0 set in computation property)
+
+  
+      Required Inputs: stage (observed gauge height)
+
+   Output variables: flow
+      (Calculated as determined above)
+
+   Programmed by A. Gilmore July 2008;
+ 
+      modified by  M. Bogner  April 2009 to calculate for widths &lt;= 9.0;
+
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.ParshallFlume</ExecClass>
+    <AlgoProperty name="width">25</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="stage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="flow">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

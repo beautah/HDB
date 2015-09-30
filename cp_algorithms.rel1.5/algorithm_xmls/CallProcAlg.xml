@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="CallProcAlg">
+    <Comment>
+      Takes up to 5 input values labeled input1 ... input5.
+the callproc
+      property will have all the proper procedure call elements already
+      established
+so all this program has to do is call the procedure
+the
+      &lt;&lt;input1&gt;&gt;... &lt;&lt;input5&gt;&gt; and &lt;&lt;,tsbt&gt;&gt;
+      can be used if you want to use the procedure call dynamic
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.CallProcAlg</ExecClass>
+    <AlgoProperty name="proccall">""</AlgoProperty>
+    <AlgoProperty name="input5_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input4_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input3_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input2_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input1_MISSING">ignore</AlgoProperty>
+    <AlgoParm roleName="input1">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input2">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input3">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input4">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input5">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

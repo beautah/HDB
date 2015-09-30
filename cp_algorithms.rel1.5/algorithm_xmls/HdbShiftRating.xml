@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="HdbShiftRating">
+    <Comment>
+      Implements the Shift and Rating Table Lookups from the database.
+      Independent value is called &quot;indep&quot;.
+Dependent values are
+      &quot;shift&quot; and &quot;dep&quot;.
+Shift may or may not be stored in
+      the database
+
+By default, uses a shift input in the
+      &quot;singleShift&quot; property.
+If variableShift is defined as true,
+      then uses a rating algorithm
+from the database to find the shift.
+
+Default
+      value for shiftTableType is &quot;Stage Shift&quot; which
+will linearly
+      interpolate shifts from a single shift table.
+Other options are:
+Time
+      Interpolated Shift: lookup shifts separated in time, do
+   linear
+      interpolations in time.
+Time Interpolated Variable Shift: linear
+      interpolate shifts from stage,
+   do linear interpolations in time from
+      the resulting shifts
+   
+The shift, if any, is added to the indep value,
+      and then the dep value is found via 
+a &quot;Stage Flow&quot; rating table
+      type.
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.HdbShiftRating</ExecClass>
+    <AlgoProperty name="singleShift">0</AlgoProperty>
+    <AlgoProperty name="variableShift">false</AlgoProperty>
+    <AlgoProperty name="shiftTableType">Stage Shift</AlgoProperty>
+    <AlgoParm roleName="indep">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="dep">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="shift">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

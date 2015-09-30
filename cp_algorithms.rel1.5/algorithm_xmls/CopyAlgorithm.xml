@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="CopyAlgorithm">
+    <Comment>
+      CopyAlgorithm copies a single &apos;input&apos; parameter to a single
+      &apos;output&apos; parameter.
+ 
+Modified June 2009 By M. Bogner to add
+      missing property for proper deletes and 
+a version
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.CopyAlgorithm</ExecClass>
+    <AlgoProperty name="input_MISSING">ignore</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

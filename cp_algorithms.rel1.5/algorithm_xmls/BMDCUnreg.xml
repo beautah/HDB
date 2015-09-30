@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="BMDCUnreg">
+    <Comment>
+      Blue Mesa Unregulated Inflow Computation
+Takes Taylor Park Delta Storage
+      from t-1 and
+adds it to Blue Mesa Inflow to get Unregulated Inflow
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.BMDCUnreg</ExecClass>
+    <AlgoProperty name="TPRCDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="BMDCInflow_missing">fail</AlgoProperty>
+    <AlgoParm roleName="TPRCDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="BMDCInflow">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="unreg">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

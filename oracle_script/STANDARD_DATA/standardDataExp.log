@@ -1,0 +1,126 @@
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+Export done in US7ASCII character set and AL16UTF16 NCHAR character set
+Note: grants on tables/views/sequences/roles will not be exported
+Note: indexes on tables will not be exported
+Note: constraints on tables will not be exported
+
+About to export specified users ...
+. exporting pre-schema procedural objects and actions
+. exporting foreign function library names for user STANDARD 
+. exporting foreign function library names for user STANDARD_CZAR 
+. exporting foreign function library names for user STANDARD_DECODES 
+. exporting PUBLIC type synonyms
+. exporting private type synonyms
+. exporting PUBLIC type synonyms
+. exporting private type synonyms
+. exporting PUBLIC type synonyms
+. exporting private type synonyms
+. exporting object type definitions for user STANDARD 
+. exporting object type definitions for user STANDARD_CZAR 
+. exporting object type definitions for user STANDARD_DECODES 
+About to export STANDARD's objects ...
+. exporting database links
+. exporting sequence numbers
+. exporting cluster definitions
+. about to export STANDARD's tables via Conventional Path ...
+. . exporting table                   CP_ALGORITHM         26 rows exported
+. . exporting table               CP_ALGO_PROPERTY        106 rows exported
+. . exporting table                CP_ALGO_TS_PARM         89 rows exported
+. . exporting table                 CP_COMPUTATION         20 rows exported
+. . exporting table                       HDB_AGEN         46 rows exported
+. . exporting table                       HDB_ATTR        375 rows exported
+. . exporting table          HDB_COLLECTION_SYSTEM         16 rows exported
+. . exporting table                    HDB_DAMTYPE         12 rows exported
+. . exporting table                   HDB_DATATYPE        485 rows exported
+. . exporting table           HDB_DATATYPE_FEATURE        273 rows exported
+. . exporting table              HDB_DATATYPE_TYPE          6 rows exported
+. . exporting table                HDB_DATA_SOURCE         14 rows exported
+. . exporting table             HDB_DATE_TIME_UNIT          6 rows exported
+. . exporting table            HDB_DERIVATION_FLAG          5 rows exported
+. . exporting table                    HDB_DIVTYPE          2 rows exported
+. . exporting table               HDB_DMI_UNIT_MAP         27 rows exported
+. . exporting table              HDB_EXT_DATA_CODE         42 rows exported
+. . exporting table          HDB_EXT_DATA_CODE_SYS          4 rows exported
+. . exporting table          HDB_EXT_SITE_CODE_SYS          3 rows exported
+. . exporting table                    HDB_FEATURE        109 rows exported
+. . exporting table              HDB_FEATURE_CLASS          5 rows exported
+. . exporting table           HDB_FEATURE_PROPERTY        162 rows exported
+. . exporting table                   HDB_GAGETYPE          0 rows exported
+. . exporting table                   HDB_INTERVAL          8 rows exported
+. . exporting table        HDB_LOADING_APPLICATION         40 rows exported
+. . exporting table                     HDB_METHOD         21 rows exported
+. . exporting table               HDB_METHOD_CLASS         16 rows exported
+. . exporting table          HDB_METHOD_CLASS_TYPE          4 rows exported
+. . exporting table                  HDB_MODELTYPE          3 rows exported
+. . exporting table                 HDB_OBJECTTYPE         30 rows exported
+. . exporting table                   HDB_OPERATOR          4 rows exported
+. . exporting table             HDB_OVERWRITE_FLAG          2 rows exported
+. . exporting table                   HDB_PROPERTY          3 rows exported
+. . exporting table           HDB_RATING_ALGORITHM          4 rows exported
+. . exporting table                HDB_RATING_TYPE          8 rows exported
+. . exporting table                      HDB_STATE         50 rows exported
+. . exporting table                   HDB_USBR_OFF         15 rows exported
+. . exporting table                 HDB_VALIDATION         13 rows exported
+. . exporting table               REF_DB_PARAMETER          5 rows exported
+. . exporting table      REF_INTERVAL_REDEFINITION          1 rows exported
+. . exporting table          TSDB_DATABASE_VERSION          1 rows exported
+. . exporting table                  TSDB_PROPERTY          1 rows exported
+. exporting synonyms
+. exporting views
+. exporting stored procedures
+. exporting operators
+About to export STANDARD_CZAR's objects ...
+. exporting database links
+. exporting sequence numbers
+. exporting cluster definitions
+. about to export STANDARD_CZAR's tables via Conventional Path ...
+. . exporting table                  HDB_DIMENSION         62 rows exported
+. . exporting table          HDB_PHYSICAL_QUANTITY         90 rows exported
+. . exporting table                       HDB_UNIT        176 rows exported
+. exporting synonyms
+. exporting views
+. exporting stored procedures
+. exporting operators
+About to export STANDARD_DECODES's objects ...
+. exporting database links
+. exporting sequence numbers
+. exporting cluster definitions
+. about to export STANDARD_DECODES's tables via Conventional Path ...
+. . exporting table               DATAPRESENTATION        131 rows exported
+. . exporting table                       DATATYPE        605 rows exported
+. . exporting table            DATATYPEEQUIVALENCE         12 rows exported
+. . exporting table         DECODESDATABASEVERSION          1 rows exported
+. . exporting table                           ENUM         16 rows exported
+. . exporting table                      ENUMVALUE         81 rows exported
+. . exporting table              PRESENTATIONGROUP          1 rows exported
+. . exporting table                  UNITCONVERTER         77 rows exported
+. exporting synonyms
+. exporting views
+. exporting stored procedures
+. exporting operators
+. exporting indextypes
+. exporting posttables actions
+. exporting materialized views
+. exporting snapshot logs
+. exporting job queues
+. exporting refresh groups and children
+. exporting dimensions
+. exporting indextypes
+. exporting posttables actions
+. exporting materialized views
+. exporting snapshot logs
+. exporting job queues
+. exporting refresh groups and children
+. exporting dimensions
+. exporting indextypes
+. exporting posttables actions
+. exporting materialized views
+. exporting snapshot logs
+. exporting job queues
+. exporting refresh groups and children
+. exporting dimensions
+. exporting post-schema procedural objects and actions
+. exporting statistics
+Export terminated successfully without warnings.

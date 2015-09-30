@@ -1,5 +1,5 @@
 # flowDuration makefile
-# $Id$
+# $Id: Makefile,v 1.2 2004/12/28 20:40:37 hdba Exp $
 
 include ../../Environ
 

@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: tomorrow.c,v 1.2 2004/12/28 20:42:59 hdba Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>

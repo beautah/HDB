@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="DynamicAggregatesAlg">
+    <Comment>
+      This algorithm is for aggregations across HDB expected intervals. 
+Will do
+      any ORACLE based aggregation that takes only the one value 
+as the
+      function  ie MAX(value)  so this algorithm can presently do:
+
+min, max,
+      avg, count, sum, median, stddev, and variance
+
+specify the aggregate they
+      desire by stating the oracle 
+function in the aggregate_name property  ie
+      aggregate_name=sum
+
+MIN_VALUES_REQUIRED: setting to zero means use max
+      number observations for interval 
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.DynamicAggregatesAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="aggregate_name">NONE</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="FlowToVolumeAlg">
+    <Comment>
+      This algorithm calculates volume based on the average of the flows for
+      that interval
+
+Properties: partial_calculations, min_values_required,
+      min_values_desired, validation_flag
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.FlowToVolumeAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="PowerToEnergyAlg">
+    <Comment>
+      PowerToEnergyALg - calculates Energy base on power readings converted
+to
+      hourly Megawatt rates
+
+Parameters:
+
+partial_calculations: boolean: default
+      false: if current period partial calculations will be performed
+      min_values_required: number: default 1: the minimum number of observations
+      required to perform computation
+min_values_desired: number: default 0: the
+      minimum number of observations desired to perform computation
+      validation_flag: string: default empty: the validation flag value to be
+      sent to the database 
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.PowerToEnergyAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="TimeWeightedAverageAlg">
+    <Comment>
+      This algorithm does a time weighted average over the interval period
+
+      Parameters:
+
+partial_calculations: boolean: default false: if current
+      period partial calculations will be performed
+min_values_required: number:
+      default 1: the minimum number of observations required to perform
+      computation
+min_values_desired: number: default 0: the minimum number of
+      observations desired to perform computation
+validation_flag: string:
+      default empty: the validation flag value to be sent to the database
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.TimeWeightedAverageAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="VolumeToFlowAlg">
+    <Comment>
+      This algorithm calculates flows based on the sum of the volumes for a
+      given period
+
+Parameters:
+
+partial_calculations: boolean: default false:
+      if current period partial calculations will be performed
+      min_values_required: number: default 1: the minimum number of observations
+      required to perform computation
+min_values_desired: number: default 0: the
+      minimum number of observations desired to perform computation
+      validation_flag: string: default empty: the validation flag value to be
+      sent to the database
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.VolumeToFlowAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

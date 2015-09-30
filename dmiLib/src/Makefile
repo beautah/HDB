@@ -1,5 +1,5 @@
 # dmiLib makefile
-# $Id$: 
+# $Id: Makefile,v 1.4 2005/05/11 20:11:13 uchdba Exp $: 
 
 include ../../Environ
 

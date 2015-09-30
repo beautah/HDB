@@ -1,5 +1,0 @@
-CP_Derivations=Derivation_process_
-Ratings=Ratings
-#Run command to check availability, if a 0 is returned, it is down:
-LRGS/DECODES=`rs -e DailyTest |wc -l`
-LDM=`ps -fuldm |grep ldmd|wc -l`

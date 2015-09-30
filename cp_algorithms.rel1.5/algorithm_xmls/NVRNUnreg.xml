@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="NVRNUnreg">
+    <Comment>
+       * Navajo Unregulated Inflow Computation
+Sums Vallecito Delta Storage and
+      Evaporation at t-1
+adds it to Navajo Inflow to get Unregulated Inflow
+Adds
+      Azotea tunnel volume to Navajo Unregulated flow to get Mod Unregulated
+      Flow
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.NVRNUnreg</ExecClass>
+    <AlgoProperty name="SJANVolume_missing">fail</AlgoProperty>
+    <AlgoProperty name="VCRCDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="NVRNInflow_missing">fail</AlgoProperty>
+    <AlgoProperty name="VCRCEvap_missing">fail</AlgoProperty>
+    <AlgoParm roleName="VCRCDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="VCRCEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="NVRNInflow">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="SJANVolume">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="unreg">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="modunreg">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

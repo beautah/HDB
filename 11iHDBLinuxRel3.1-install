@@ -1,0 +1,47 @@
+#!/bin/sh -h
+
+# This script installs an HDB tarred release file in a user-defined directory
+# and sets up wrappers for the executables so the included libraries are
+# accessed
+
+# The RELEASE variable must be redefined for each release version and this
+# file's name changed to reflect the release number.
+RELEASE=11iHDBLinuxRel3.1
+
+# Get the installation destination directory
+while : 
+do
+    echo "Enter full path name of installation directory:"
+    read NEW_INST_DIR
+
+    if [ -z "$NEW_INST_DIR" ]; then
+        echo "No directory entered."
+        exit 1
+    fi
+
+    if [ -d $NEW_INST_DIR ] ; then
+        if [ ! -w $NEW_INST_DIR ] ; then
+           echo "That directory already exists BUT is NOT writeable by you."
+           echo "That would cause the installation to fail."
+        else
+           break
+        fi
+    else
+        mkdir $NEW_INST_DIR
+        if [ $? -ne 0 ]; then
+           echo ; echo "Cannot make directory $NEW_INST_DIR."
+           echo "Probably you do not have write permission to create a "
+	   echo "directory at that location."
+        else
+           break
+        fi
+    fi
+
+    echo "Please select a different directory." ; echo
+done
+
+# Untar the file in the installation directory
+echo "Installing files.  Please wait ...."
+(cd $NEW_INST_DIR; tar xvf - )< $RELEASE-tar
+echo "Script file installation complete"
+ 

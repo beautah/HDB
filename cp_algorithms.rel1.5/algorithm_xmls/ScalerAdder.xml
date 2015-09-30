@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="ScalerAdder">
+    <Comment>
+      Takes up to 5 input values labeled input1 ... input5. Multiplies
+them by
+      coefficients supplied in properties coeff1 ... coeff5.
+Adds them together
+      and produces a single output labeled &apos;output&apos;.
+Values not
+      assigned by computation are ignored.
+All coefficients default to 1.0 if
+      not supplied.
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.ScalerAdder</ExecClass>
+    <AlgoProperty name="input2_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input5_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input3_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input1_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff5">1.0</AlgoProperty>
+    <AlgoProperty name="coeff4">1.0</AlgoProperty>
+    <AlgoProperty name="coeff3">1.0</AlgoProperty>
+    <AlgoProperty name="coeff2">1.0</AlgoProperty>
+    <AlgoProperty name="input4_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff1">1.0</AlgoProperty>
+    <AlgoParm roleName="input1">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input2">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input3">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input4">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input5">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="GLDAEvap">
+    <Comment>
+      Implements the Powell Evaporation Computation.
+
+net evap = gross evap -
+      river evap - streamside evap - terrace evap - remaining evap
+areas for
+      river, streamside, and terrace cover from separate ratings
+river evap is
+      river area * gross evap coeff
+streamside evap is streamside area *
+      streamside evap coeff * ave temp
+terrace evap is terrace area * terrace
+      evap coeff * ave temp
+remaining evap is (area - all areas) * ave precip
+
+      Inputs are:
+area from reservoir elevation lookup
+reservoir elevation
+
+      These are SDI pointers to lookup coefficients
+from the stat tables.
+gross
+      evap coeff
+streamside evap coeff
+terrace evap coeff
+average monthly
+      rainfall
+average monthly temperature
+
+Output is net evaporation as a
+      volume, plus the component evaporations of
+gross, river, streamside,
+      terrace, remaining.
+
+&lt;p&gt;Properties include: 
+&lt;ul&gt; 
+      &lt;li&gt;ignoreTimeSeries - completely ignore changes to any timeseries
+      value from evapCoeff, and always lookup from database.
+&lt;/li&gt;
+      &lt;/ul&gt;
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.GLDAEvap</ExecClass>
+    <AlgoProperty name="grossEvapCoeff_missing">ignore</AlgoProperty>
+    <AlgoProperty name="streamEvapCoeff_missing">ignore</AlgoProperty>
+    <AlgoProperty name="aveTemp_missing">ignore</AlgoProperty>
+    <AlgoProperty name="terraceEvapCoeff_missing">ignore</AlgoProperty>
+    <AlgoProperty name="area_missing">fail</AlgoProperty>
+    <AlgoProperty name="ignoreTimeSeries">true</AlgoProperty>
+    <AlgoProperty name="elev_missing">fail</AlgoProperty>
+    <AlgoProperty name="avePrecip_missing">ignore</AlgoProperty>
+    <AlgoParm roleName="area">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="elev">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="grossEvapCoeff">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="streamEvapCoeff">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="terraceEvapCoeff">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="aveTemp">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="avePrecip">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="netEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="grossEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="riverEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="streamsideEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="terraceEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="remainingEvap">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

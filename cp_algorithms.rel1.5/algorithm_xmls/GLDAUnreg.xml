@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="GLDAUnreg">
+    <Comment>
+      Lake Powell Unregulated Inflow Computation
+Sums Delta Storages and
+      Evaporations at the indicated timestep from these reservoirs
+Fontenelle
+      (t-8)
+Flaming Gorge (t-6)
+Blue Mesa (t-4)
+Navajo (t-5)
+Vallecito (t-6)
+
+      Also adds Taylor Park Delta Storage from t-5, and
+Flaming Gorge Delta Bank
+      Storage from t-6
+
+adds it to Lake Powell Inflow to get Unregulated Inflow
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.GLDAUnreg</ExecClass>
+    <AlgoProperty name="FTRWDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="FLGUDeltaBS_missing">fail</AlgoProperty>
+    <AlgoProperty name="GLDAInflow_missing">fail</AlgoProperty>
+    <AlgoProperty name="FTRWEvap_missing">fail</AlgoProperty>
+    <AlgoProperty name="FLGUDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="NVRNDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="VCRCEvap_missing">fail</AlgoProperty>
+    <AlgoProperty name="NVRNEvap_missing">fail</AlgoProperty>
+    <AlgoProperty name="VCRCDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="FLGUEvap_missing">fail</AlgoProperty>
+    <AlgoProperty name="BMDCEvap_missing">fail</AlgoProperty>
+    <AlgoProperty name="TPRCDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoProperty name="BMDCDeltaStorage_missing">fail</AlgoProperty>
+    <AlgoParm roleName="FTRWDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FTRWEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FLGUDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FLGUEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="FLGUDeltaBS">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="VCRCDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="VCRCEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="TPRCDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="NVRNDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="NVRNEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="BMDCDeltaStorage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="BMDCEvap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="GLDAInflow">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="unreg">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

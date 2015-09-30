@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="EstGLDAInflow">
+    <Comment>
+      Computes the Powell inflow from the three upstream gages and a side inflow
+      coefficient. If any gages are missing, estimates inflow using mass balance
+      and an assumed delta bankstorage coefficient.
+
+This algorithm does not
+      actually write to delta bank storage, but the resulting
+estimated inflow
+      will result in a delta bank storage that matches the value
+used here.
+ 
+      Inputs:
+bffu = San Juan River at Bluff
+clru = Colorado River at Cisco
+grvu
+      = Green River at Green River, UT
+evap = Powell Evaporation
+delta_storage =
+      Powell change in storage
+total_release = Powell total release volume
+
+      Output:
+inflow = Powell total inflow
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.EstGLDAInflow</ExecClass>
+    <AlgoProperty name="delta_storage_MISSING">fail</AlgoProperty>
+    <AlgoProperty name="total_release_MISSING">fail</AlgoProperty>
+    <AlgoProperty name="bscoeff">0.04</AlgoProperty>
+    <AlgoProperty name="grvu_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="bffu_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="evap_MISSING">fail</AlgoProperty>
+    <AlgoProperty name="clru_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="inflowCoeff_MISSING">ignore</AlgoProperty>
+    <AlgoParm roleName="bffu">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="clru">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="grvu">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="delta_storage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="total_release">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="inflowCoeff">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="inflow">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

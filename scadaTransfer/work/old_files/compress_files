@@ -1,3 +1,0 @@
-#!/bin/bash
-year=`/usr/local/bin/date -d'last year' +%Y`
-compress crsp_$year*.dat

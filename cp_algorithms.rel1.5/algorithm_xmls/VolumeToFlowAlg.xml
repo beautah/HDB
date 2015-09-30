@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="VolumeToFlowAlg">
+    <Comment>
+      VolumeToFlowAlg calculates average flows based on the sum of the inputs
+      volumes for the given period	
+	
+Flow (cfs) = sum of volumes * 43560 sq ft
+      per acre / # of days / 86400 seconds	
+	
+This algorithm assumes units are
+      in cfs and acre-feet; if not a conversion is done to output the correct
+      units
+	
+Parameters:	
+	
+partial_calculations: boolean: default false: if
+      current period partial calculations will be performed	
+      min_values_required: number: default 1: the minimum number of observations
+      required to perform computation	
+min_values_desired: number: default 0:
+      the minimum number of observations desired to perform computation	
+      validation_flag: string: default empty: the validation flag value to be
+      sent to the database
+flow_factor: Number: use as multiplier for volume to
+      flow factor (.5,.5041) : Default: 43560/86400	
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.VolumeToFlowAlg</ExecClass>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="flow_factor"> 43560/86400 </AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

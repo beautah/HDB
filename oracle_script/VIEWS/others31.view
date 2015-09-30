@@ -1,0 +1,47 @@
+CREATE OR REPLACE FORCE VIEW DAYS
+ ( "START_DATE_TIME"
+  )  AS 
+  select to_date('01-OCT-1877','DD-MON-YYYY') + rownum  start_date_time
+from r_day where rownum between 0 and 50000 ;
+
+
+
+
+CREATE OR REPLACE FORCE VIEW HDB_DATATYPE_UNIT 
+ ( "UNIT_IND", "DEST_ID", "DEST_NAME", "DIMENSION_NAME"
+  )  AS 
+  select 'D' unit_ind, datatype_id dest_id, datatype_name dest_name,
+  dimension_name dimension_name
+from hdb_datatype, hdb_dimension, hdb_unit
+where hdb_datatype.unit_id = hdb_unit.unit_id
+  and hdb_unit.dimension_id = hdb_dimension.dimension_id
+union
+select 'U' unit_ind, unit_id dest_id, unit_name dest_name, null
+from hdb_unit;
+ 
+
+
+
+CREATE OR REPLACE FORCE VIEW V_DBA_ROLES 
+ ( "ROLE"
+  )  AS 
+  select role from dba_roles
+where password_required = 'YES';
+
+
+
+
+CREATE OR REPLACE FORCE VIEW V_HDB_SITE_DATATYPE_NAME 
+ ( "SITE_DATATYPE_ID", "S_D_NAME"
+  )  AS 
+  SELECT site_datatype_id, site_name||'---'||datatype_common_name s_d_name
+FROM hdb_site_datatype, hdb_site, hdb_datatype
+WHERE
+     hdb_site_datatype.site_id = hdb_site.site_id
+AND  hdb_site_datatype.datatype_id = hdb_datatype.datatype_id ;
+ 
+
+grant select on V_HDB_SITE_DATATYPE_NAME to public;
+grant select on HDB_DATATYPE_UNIT to public;
+grant select on DAYS to public;
+grant select on V_DBA_ROLES to public;

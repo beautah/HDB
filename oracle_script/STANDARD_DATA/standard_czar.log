@@ -1,0 +1,14 @@
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+Export file created by EXPORT:V09.02.00 via conventional path
+
+Warning: the objects were exported by STANDARD, not by you
+
+import done in US7ASCII character set and AL16UTF16 NCHAR character set
+. importing STANDARD_CZAR's objects into STANDARD_CZAR
+. . importing table                "HDB_DIMENSION"         62 rows imported
+. . importing table        "HDB_PHYSICAL_QUANTITY"         90 rows imported
+. . importing table                     "HDB_UNIT"        176 rows imported
+Import terminated successfully without warnings.

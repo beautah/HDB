@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="FlowToVolumeAlg">
+    <Comment>
+      Algorithm calculates volume using average interval flows
+
+Properties: 
+
+      PARTIAL_CALCULATIONS: true/false : use if a running volume is wanted
+
+      MIN_VALUES_REQUIRED: Number: the required number of records that must
+      exist for calculation to succeed
+Value 0 means ALL interval observations
+      must exist
+
+MIN_VALUES_DESIRED: Number: will set flag field for result if
+      # of inputs are &lt;= this value
+
+VALIDATION_FLAG: set the validation flag
+      on output record
+
+OBSERVATIONS_CALCULATION : true/false : use exact number
+      of interval observations to calculate flow
+is only programmed to work for
+      hourly and daily inputs! 
+
+FLOW_FACTOR: Number: use as multiplier for flow
+      to volume factor (2.0,1.98) : Default: 86400/43560 
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.FlowToVolumeAlg</ExecClass>
+    <AlgoProperty name="observations_calculation">false</AlgoProperty>
+    <AlgoProperty name="min_values_required">1</AlgoProperty>
+    <AlgoProperty name="flow_factor"> 86400/43560 </AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

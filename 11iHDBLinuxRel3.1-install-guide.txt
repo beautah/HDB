@@ -1,0 +1,104 @@
+The purpose of this document is to guide HDB users
+in the creation of a new HDB database.  The intent of this
+document is to be brief, with the core of the instructions to 
+be either WEB accessible or in "readme.txt" files in the doc 
+directory of the installation.
+
+NOTE:  To successfully begin the installation of HDB you 
+must have acquired this file, 11iHDBLinuxRel3.1/install-guide.txt, 
+along with two other files: 
+1. 11iHDBLinuxRel3.1-install  -- this is the HDB2 installation script   
+2. 11iHDBLinuxRel3.1-tar      -- contains programs, scripts, etc... 
+
+Note that, in the remainder of this document, RELEASE 
+refers to the directory 11iHDBLinuxRel3.1 where the release
+files get extracted by the installation script.
+
+1. Decide in what directory you want the release and then
+   execute the installation script where you will enter your 
+   desired release directory.  You may have to make this file 
+   executeable by doing a: chmod +x 11iHDBLinuxRel3.1-install 
+
+   ./11iHDBLinuxRel3.1-install
+
+2. Create the HDB database
+
+C:\> set ORACLE_HOME=C:\oracle\app\product\10.2.0
+C:\> echo %ORACLE_HOME%
+
+
+mkdir -p /home/app/oracle/product/11.2.0.4/db_1
+chown -R oracle:oinstall /home/app
+chmod -R 775 /home/app
+
+imp system file=/home/app/oracle/admin/hdb31/dpdump/hdb31.dmp fromuser=HDBDBA touser=HDBDBA
+
+VBoxManage modifyhd "C:\Users\Ozdemir\VirtualBox VMs\oracle7\oracle7.vdi" --resize 40000
+
+set HDB_LOCAL=hdbt31
+set ORACLE_SID=hdbt31
+set ORACLE_HOME=/home/app/oracle/product/11.2.0.4/db_1
+set ORACLE_BASE=/home/app/oracle
+set LD_LIBRARY_PATH=%ORACLE_HOME%/lib
+set PATH "$PATH":"$ORACLE_HOME"/bin
+
+
+
+
+
+   See RELEASE/doc/linux_install.pdf OR
+   the HDB Users' Web page, Database,
+   Install Guide, for instructions
+   on installing HDB.
+
+3. Install the Meta Data Application
+
+   See RELEASE/doc/meta_data_installation.pdf OR
+   the HDB Users' Web page, Meta Data Application,
+   Meta Data Application Installation Guide.
+
+4. If applicable, install The Water Accounting Application database objects
+   set you default directory to the "release directory"/wateraccounting
+   log on to an sqlplus session either as sys, a dba, or the dba that currently owns the HDB tables (Preferred method), 
+   execute the sql command : @create_wa "HDB dba that owns all the tables"    example: @create_wa uchdba
+   exit the sql session andeck th e.out files for any obvious errors.  a unix command: grep ERROR *.out should suffice  
+
+
+5  Edit the .cshrc_hdb_app file
+
+   See RELEASE/doc/cshrc_hdb_app_readme.txt for
+   instructions.  And make sure you source it so that your
+   environment variable take effect.
+
+7. Import site Specific Data
+
+   If you do not have a prior version of HDB or you want 
+   to start this database with no previously entered
+   metadata, then skip this step.
+
+   However if you have site specific data or Metadata
+   in a previous version of HDB then you need
+   to import this data into the newly created HDB2.
+
+   To do the data export and the import set your default
+   to RELEASE/oracle_script/site_data and
+   see RELEASE/doc/site_data_readme.txt for instructions
+
+8. Set up cron jobs for Data Loaders
+
+   Your Installation will probably want to use cron jobs to load
+   your Hydromet data.
+
+   see RELEASE/doc/data_loaders_readme.txt for instructions
+
+9. Site-specific applications
+
+   Sutron-maintained library source and object code is included in
+   the release for sites that use this code in their site_specific
+   applications. These include the following:
+      
+   Environ file
+   hdbLib directory
+   utilsLib directory
+   lib directory
+   include directory

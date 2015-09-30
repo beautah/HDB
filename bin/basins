@@ -1,0 +1,7 @@
+#!/bin/sh
+
+LD_LIBRARY_PATH=/home/mbogner/HDB_INSTALLS/10gHDBLinuxRel1.4/bin/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+
+/home/mbogner/HDB_INSTALLS/10gHDBLinuxRel1.4/bin/basins.exe $*
+

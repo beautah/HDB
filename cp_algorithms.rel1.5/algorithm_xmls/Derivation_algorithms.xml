@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="BeginofPeriodAlg">
+    <Comment>
+      This algorithm takes the first record by time in a time series and 
+and uses that record's value for the output record. 
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.BeginofPeriodAlg</ExecClass>
+    <AlgoProperty name="req_window_period">0</AlgoProperty>
+    <AlgoProperty name="desired_window_period">0</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="DynamicAggregatesAlg">
+    <Comment>
+      This algorithm performs a normal aggregate function on all the records 
+in a time series and uses that aggregates calculated value for the output record. 
+The aggregate_name user-defined property defines the aggregate the user desires.
+Valid aggregate names are : avg, sum, count, min, max, stddev, variance, median 
+and any future aggregates that only take a single (value) as the input to the aggregate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.DynamicAggregatesAlg</ExecClass>
+    <AlgoProperty name="min_values_required">0</AlgoProperty>
+    <AlgoProperty name="aggregate_name">NONE</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="EOPInterpAlg">
+    <Comment>
+      This algorithm takes the last record by time in a time series and 
+the first record in the following time period for that interval, interpolates
+ a value based on the time difference between the two records and uses that value for the output record. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.EOPInterpAlg</ExecClass>
+    <AlgoProperty name="desired_window_period">0</AlgoProperty>
+    <AlgoProperty name="req_window_period">0</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="EndofPeriodAlg">
+    <Comment>
+      This algorithm takes the last record by time in a time series and 
+and uses that record's value for the output record. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.EndofPeriodAlg</ExecClass>
+    <AlgoProperty name="desired_window_period">0</AlgoProperty>
+    <AlgoProperty name="req_window_period">0</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="FlowToVolumeAlg">
+    <Comment>
+      This algorithm takes the average of the record's flow values in a 
+time series and uses that value converted to a volume for the output record. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.FlowToVolumeAlg</ExecClass>
+    <AlgoProperty name="min_values_required">0</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="TimeWeightedAverageAlg">
+    <Comment>
+      This algorithm takes all the records in a time series, interpolates values 
+for the period's beginning and end times (if needed) and calculates a time weighted 
+average of all the values for the output record. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.TimeWeightedAverageAlg</ExecClass>
+    <AlgoProperty name="min_values_required">0</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="PowerToEnergyAlg">
+    <Comment>
+      PowerToEnergyALg - calculates Energy base on power readings converted
+to
+      hourly Megawatt rates
+
+Parameters:
+
+partial_calculations: boolean: default
+      false: if current period partial calculations will be performed
+      min_values_required: number: default 0: the minimum number of observations
+      required to perform computation
+min_values_desired: number: default 0: the
+      minimum number of observations desired to perform computation
+      validation_flag: string: default empty: the validation flag value to be
+      sent to the database 
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.PowerToEnergyAlg</ExecClass>
+    <AlgoProperty name="min_values_required">0</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="EquationSolverAlg">
+    <Comment>
+      Takes up to 5 input values labeled input1 ... input5. 
+Takes the values of
+      these inputs and replaces the reference of these
+inputs in the supplied
+      equation and the equation is then submitted to ORACLE
+to be evaluated
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.EquationSolverAlg</ExecClass>
+    <AlgoProperty name="input5_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input4_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input3_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input2_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="equation">""</AlgoProperty>
+    <AlgoProperty name="input1_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="input1">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input2">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input3">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input4">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input5">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+  <Algorithm name="VolumeToFlowAlg">
+    <Comment>
+      Type a javadoc-style comment describing the algorithm class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.VolumeToFlowAlg</ExecClass>
+    <AlgoProperty name="min_values_required">0</AlgoProperty>
+    <AlgoProperty name="partial_calculations">false</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoProperty name="min_values_desired">0</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

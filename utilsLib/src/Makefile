@@ -1,9 +1,9 @@
-# utilsLib makefile64
-# $Id$
+# utilsLib makefile
+# $Id: Makefile,v 1.1.1.1 2004/04/14 17:11:49 uchdba Exp $
 
-include ../../Environ.10
+include ../../Environ
 
-OBJDIR=	$(HDB_ENV)/utilsLib/obj64
+OBJDIR=	$(HDB_ENV)/utilsLib/obj
 INCLUDES = -I$(HDB_APP_INCLUDE)
 LIBS = $(HDB_LIBS) -lm -ldl
 CFLAGS = -ansi -Wall -g -DANSIPROTO $(INCLUDES)

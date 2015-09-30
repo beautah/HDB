@@ -7,13 +7,12 @@ In general,  the java routines utilize the environment variable CLASSPATH.  This
 shell script and either be sourced by default or explicitly sourced.  Included in this classpath
 environment variable must be the following:
 
-1.  The full path and the name of the ORACLE java zip file ie /local/oracle/product/816/jdbc/lib/classes12.zip
-    Generally your DBA will have already loaded this zip file to your ORACLE installation but a current copy
-    can also be found at your <HDB2 release Directory>/bin/lib
+1.  The full path and the name of the ORACLE java jar file ie /u01/oracle/product/10.2.0/jdbc/lib/ojdbc14.jar
+    Generally your DBA will have already loaded this jar file to your ORACLE installation but a current copy of the zip file can also be found at your <HDB2 release Directory>/lib
 
-2.  The full path and name of the dataloader jar file ie .../HDB2release1.0/bin/lib/dataloader.jar
+2.  The full path and name of the dataloader jar file ie .../10gHDBLinuxRel1.1/lib/dataloader.jar
 
-3.  The full path and name of the database pool jar file ie .../HDB2release1.0/bin/lib/jdbcpool-0.99.jar
+3.  The full path and name of the database pool jar file ie .../10gHDBLinuxRel1.1/lib/jdbcpool-0.99.jar
 
 Once you have set the classpath correctly you can test the operation of any of the java utilities
 by executing the command java <utility name> -v  ie.  java dataloader.Server -v

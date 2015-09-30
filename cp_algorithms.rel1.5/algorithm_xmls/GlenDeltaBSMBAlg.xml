@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="GlenDeltaBSMBAlg">
+    <Comment>
+      This algorithm calculates the Glen Canyon Bank Storage Mass Balance
+
+The
+      calculation for the Bank storage is Inflow minus the total Releases, 
+      delta storage, and evaporation
+
+If inputs Delta Storage or Total Release
+      Above or Total Release Below
+or  ithe Evap do not exist or have been
+      deleted and the 
+DELTA_STORAGE_MISSING or the TOTAL_RELEASE_MISSING or
+      EVAP_MISSING,
+or INFLOW_MISSING properties are set to &quot;fail&quot;
+      then the BANK STORAGE
+will not be calculated and/or the BANK STORAGE will
+      be deleted.
+
+If all of the inputs do not exist because of a delete the
+      BANK STORAGE
+will be deleted if the output exists regardless of the
+      property settings.
+
+This algorithm written by M. Bogner, August 2008
+      Modified by M. Bogner May 2009 to add additional delete logic and version
+      control
+
+
+    </Comment>
+    <ExecClass>decodes.hdb.algo.GlenDeltaBSMBAlg</ExecClass>
+    <AlgoProperty name="delta_storage_missing">ignore</AlgoProperty>
+    <AlgoProperty name="total_release_missing">ignore</AlgoProperty>
+    <AlgoProperty name="inflow_missing">ignore</AlgoProperty>
+    <AlgoProperty name="evap_missing">ignore</AlgoProperty>
+    <AlgoProperty name="validation_flag">""</AlgoProperty>
+    <AlgoParm roleName="inflow">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="total_release">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="delta_storage">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="evap">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="delta_bs">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

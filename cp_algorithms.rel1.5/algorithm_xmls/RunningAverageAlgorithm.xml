@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="RunningAverageAlgorithm">
+    <Comment>
+      RunningAverageAlgorithm averages single &apos;input&apos; parameter to a
+      single &apos;average&apos; 
+parameter. A separate aggPeriodInterval
+      property should be supplied.
+Example, input=Hourly Water Level,
+      output=Daily Running Average, computed hourly,
+so each hour&apos;s output
+      is the average of values at [t-23h ... t].
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.RunningAverageAlgorithm</ExecClass>
+    <AlgoProperty name="minSamplesNeeded">1</AlgoProperty>
+    <AlgoParm roleName="input">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="average">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>

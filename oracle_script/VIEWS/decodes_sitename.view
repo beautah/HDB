@@ -1,0 +1,33 @@
+/* now the view for the DECODES sitename table  */
+
+create or replace view site_to_decodes_name_view as
+select siteid, nametype, sitename, dbnum, agency_cd from (
+select a.hdb_site_id "SITEID",b.ext_site_code_sys_name "NAMETYPE", a.primary_site_code "SITENAME",
+substr(substr(secondary_site_code,1,instr(secondary_site_code,'|')-1),1,2) "DBNUM",
+substr(secondary_site_code,instr(secondary_site_code,'|')+1,5) "AGENCY_CD", f.sortnumber sortnum
+from hdb_ext_site_code a, hdb_ext_site_code_sys b, hdb_site c, ref_db_list d, decodes.enum e, decodes.enumvalue f
+where a.ext_site_code_sys_id = b.ext_site_code_sys_id and
+a.hdb_site_id = c.site_id and
+c.db_site_code = d.db_site_code and
+d.session_no = 1 and
+e.name = 'SiteNameType' and
+e.id = f.enumid and
+f.enumvalue = b.ext_site_code_sys_name and
+b.ext_site_code_sys_name <> 'hdb'
+union
+select c.site_id,f.enumvalue,to_char(c.site_id),null,null,
+f.sortnumber sortnum from
+hdb_site c, decodes.enum e, decodes.enumvalue f, ref_db_list d where
+e.name = 'SiteNameType' and
+e.id = f.enumid and
+f.enumvalue = 'hdb' and
+c.db_site_code = d.db_site_code and
+d.session_no = 1
+order by sortnum);
+
+
+grant select on site_to_decodes_name_view to public;
+grant insert,update,delete on site_to_decodes_name_view to decodes_role;
+create or replace public synonym sitename for site_to_decodes_name_view;
+
+

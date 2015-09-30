@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CompMetaData>
+  <Algorithm name="BigAdder">
+    <Comment>
+      Takes up to 20 input values labeled input1 ... input20. Multiplies
+them by
+      coefficients supplied in properties coeff1 ... coeff20.
+Adds them together
+      and produces a single output labeled &apos;output&apos;.
+The property
+      input_constant is added to the ouput result.
+input_constant defaults to 0
+      if not supplied
+Values not assigned by computation are ignored.
+All
+      coefficients default to 1.0 if not supplied.
+ 
+This algorithm is a
+      modification of Scaler adder
+Created by M. Bogner   May 2009
+
+    </Comment>
+    <ExecClass>decodes.tsdb.algo.BigAdder</ExecClass>
+    <AlgoProperty name="input8_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input19_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input1_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input12_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff20">1.0</AlgoProperty>
+    <AlgoProperty name="input6_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input17_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input10_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input_constant">0.0</AlgoProperty>
+    <AlgoProperty name="input4_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff19">1.0</AlgoProperty>
+    <AlgoProperty name="coeff18">1.0</AlgoProperty>
+    <AlgoProperty name="coeff17">1.0</AlgoProperty>
+    <AlgoProperty name="coeff16">1.0</AlgoProperty>
+    <AlgoProperty name="coeff15">1.0</AlgoProperty>
+    <AlgoProperty name="input15_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff14">1.0</AlgoProperty>
+    <AlgoProperty name="coeff13">1.0</AlgoProperty>
+    <AlgoProperty name="coeff12">1.0</AlgoProperty>
+    <AlgoProperty name="coeff11">1.0</AlgoProperty>
+    <AlgoProperty name="coeff10">1.0</AlgoProperty>
+    <AlgoProperty name="coeff9">1.0</AlgoProperty>
+    <AlgoProperty name="input20_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff8">1.0</AlgoProperty>
+    <AlgoProperty name="coeff7">1.0</AlgoProperty>
+    <AlgoProperty name="input9_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff6">1.0</AlgoProperty>
+    <AlgoProperty name="coeff5">1.0</AlgoProperty>
+    <AlgoProperty name="input2_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="coeff4">1.0</AlgoProperty>
+    <AlgoProperty name="coeff3">1.0</AlgoProperty>
+    <AlgoProperty name="coeff2">1.0</AlgoProperty>
+    <AlgoProperty name="coeff1">1.0</AlgoProperty>
+    <AlgoProperty name="input13_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input7_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input18_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input11_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input5_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input16_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input3_MISSING">ignore</AlgoProperty>
+    <AlgoProperty name="input14_MISSING">ignore</AlgoProperty>
+    <AlgoParm roleName="input1">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input2">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input3">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input4">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input5">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input6">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input7">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input8">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input9">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input10">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input11">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input12">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input13">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input14">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input15">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input16">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input17">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input18">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input19">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="input20">
+      <ParmType>i</ParmType>
+    </AlgoParm>
+    <AlgoParm roleName="output">
+      <ParmType>o</ParmType>
+    </AlgoParm>
+  </Algorithm>
+</CompMetaData>
