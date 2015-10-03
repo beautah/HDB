@@ -138,7 +138,7 @@ create public synonym rm_day_v                    for DBA.rm_day_v;
 
 create public synonym v_valid_interval_datatype   for DBA.v_valid_interval_datatype;
 
---Synonymes for others31 
+--Missing Synonymes added on 09/2015  
 CREATE OR REPLACE PUBLIC SYNONYM GET_PK_VAL_WRAP FOR DBA.GET_PK_VAL_WRAP;
 CREATE OR REPLACE PUBLIC SYNONYM CFS2ACFT FOR DBA.CFS2ACFT;
 CREATE OR REPLACE PUBLIC SYNONYM GET_HDB_SITE_COMMON_NAME FOR DBA.GET_HDB_SITE_COMMON_NAME;
@@ -148,7 +148,8 @@ create or replace public synonym V_HDB_SITE_DATATYPE_NAME for DBA.V_HDB_SITE_DAT
 create or replace public synonym V_DBA_ROLES for DBA.V_DBA_ROLES;
 create or replace public synonym HDB_DATATYPE_UNIT for DBA.HDB_DATATYPE_UNIT;
 create or replace public synonym DAYS for DBA.DAYS;
-
+CREATE OR REPLACE PUBLIC SYNONYM POPULATE_PK_HDB FOR DBA.POPULATE_PK;
+CREATE OR REPLACE PUBLIC SYNONYM POPULATE_PK_REF FOR DBA.POPULATE_PK;
 
 
 spool off

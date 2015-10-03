@@ -15,6 +15,10 @@ start ./FUNCTIONS/stn.func
 start ./FUNCTIONS/sendmail.func
 start ./FUNCTIONS/plve.func
 start ./FUNCTIONS/gscm.func
-start ./FUNCTIONS/others31.func
+start ./FUNCTIONS/CFS2ACFT.func
+start ./FUNCTIONS/GET_HDB_SITE_COMMON_NAME.func
+start ./FUNCTIONS/GET_HDB_SITE_NAME.func
+start ./FUNCTIONS/GET_PK_VAL_WRAP.func
+start ./FUNCTIONS/GSNA.func
 spool off
 exit;

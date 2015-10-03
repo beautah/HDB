@@ -132,10 +132,11 @@ grant select on DBA.r_wy to public;
 grant select on DBA.r_wystat to public;
 grant select on DBA.r_year to public;
 grant select on DBA.r_yearstat to public;
-/*   grants for others31 project
+/*   Missing grants added on 09/2015
 grant select on DBA.V_HDB_SITE_DATATYPE_NAME to public;
 grant select on DBA.HDB_DATATYPE_UNIT to public;
 grant select on DBA.DAYS to public;
+grant select on DBA.dba_roles to public;
 
  */
 spool off

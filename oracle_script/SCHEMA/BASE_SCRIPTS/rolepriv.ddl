@@ -202,7 +202,7 @@ grant insert, delete, update on ref_interval_copy_limits to calc_definition_role
 grant insert, update on hdb_loading_application to calc_definition_role;
 grant insert, update on hdb_site_datatype to calc_definition_role;
 
-/* Added for others31 roles */
+/* Missing privileges added on 09/2015*/
 grant select, insert, delete, update on ref_user_groups to savoir_faire;
 grant execute on riverware_connection to model_priv_role;
 grant delete on hdb_loading_application to calc_definition_role;

@@ -21,7 +21,7 @@ start ./PACKAGES/cp_processor.sps
 start ./PACKAGES/cp_processor.spb
 start ./PACKAGES/snapshot_manager.sps
 start ./PACKAGES/snapshot_manager.spb
---  packages added for Others31
+--  packages added for ensemble
 start ./PACKAGES/ensemble.sps
 start ./PACKAGES/ensemble.spb
 
