@@ -34,6 +34,7 @@ BEGIN
 	/*  Modified by M.  Bogner  06/01/2009 to add mods to accept different time_zone parameter */ 
 	/*  Modified by M.  Bogner  10/01/2011 to add mods to check for ACL II permissions */ 
 	/*  Modified by M.  Bogner  05/23/2012 to add Phase 3.0 mod to add entry to CP_TS_ID Table */ 
+    /*  Modified by K. Cavalier 29-APR-2016 to move Validation and Data Flag Checking Code from R_BASE_BEFORE_INSERT_UPDATE Trigger to here to avoid unnecessary duplicate archives  */
 
   	/* see if ACL PROJECT II is enabled and if user is permitted */
 	IF (hdb_utilities.is_feature_activated('ACCESS CONTROL LIST GROUP VERSION II') = 'Y' AND 
@@ -104,6 +105,26 @@ BEGIN
 			VALIDATION_NEW,
 			DATA_FLAGS_NEW);
 	END IF;
+
+/* Moved Validation and Data Flag Checking Code from R_BASE_BEFORE_INSERT_UPDATE Trigger to here 
+     to avoid unnecessary duplicate archives -kcavalier 29-APR-2016 */
+  
+  -- Moves legacy validation codes to data flags
+  IF VALIDATION_NEW in ('E','+','-','w','n','|','^','~',chr(32)) then
+     DATA_FLAGS_NEW := VALIDATION_NEW || substr(DATA_FLAGS_NEW,1,19);
+     VALIDATION_NEW := NULL;
+  end if;
+  
+  -- Validate the data before it goes into the table
+  if (nvl(VALIDATION_NEW,'Z') in ('Z')) then
+    hdb_utilities.validate_r_base_record
+      (site_datatype_id,
+       interval,
+       START_DATE_TIME_NEW,
+       VALUE_NEW,
+       VALIDATION_NEW);
+  end if;
+  /* End of Move Validation Code */
 
     /*  go see if a record already exists ; if not do an insert otherwise do an update as long as do_update <> 'N'  */
     /*  Default date time of ADA Byron birthdate to indicate record came through procedures  */

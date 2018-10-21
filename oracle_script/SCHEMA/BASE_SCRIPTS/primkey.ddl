@@ -418,6 +418,8 @@ ALTER TABLE ref_spatial_relation
       index tablespace hdb_idx storage (initial 50k next 50k pctincrease 0));  
 
 
+ALTER TABLE REF_USER_GROUPS ADD CONSTRAINT REF_USER_GROUPS_PK PRIMARY KEY (USER_NAME,GROUP_NAME) ENABLE;
+
 
 ALTER user DBA 
 default tablespace hdb_data

@@ -1464,7 +1464,210 @@ commit;
 	  
 END; /*  end of procedure modify_site_group_name  */
 
-  
+
+ PROCEDURE touch_for_re_calculate_algo(
+    SITE_DATATYPE_ID NUMBER,
+    INTERVAL         VARCHAR2,
+    START_TIME DATE,
+    END_TIME    DATE ) IS
+    up_statement varchar2(2000);
+	procedure_indicator varchar2(100);
+    indicator varchar2(1);
+    temp_chars varchar2(30);
+    END_TIME_TEMP DATE;
+    rows_touched NUMBER;
+ BEGIN
+
+	procedure_indicator := 'touch_for_re_calculate_algo FAILED FOR: ';
+/*  first do error checking  */
+    IF SITE_DATATYPE_ID IS NULL THEN DENY_ACTION (procedure_indicator || 'INVALID <NULL> SITE_DATATYPE_ID' );
+	ELSIF INTERVAL IS NULL THEN DENY_ACTION ( procedure_indicator || 'INVALID <NULL> INTERVAL' );
+	ELSIF START_TIME IS NULL THEN DENY_ACTION (procedure_indicator || 'INVALID <NULL> START_TIME' );
+	ELSIF END_TIME < START_TIME THEN DENY_ACTION (procedure_indicator || 'INVALID END_TIME : < START_TIME' );
+    END IF;
+
+
+/*  if end time was passed in null or used default null then set to start_time  */
+	END_TIME_TEMP := END_TIME;
+	IF END_TIME IS NULL THEN
+	  END_TIME_TEMP := START_TIME;
+	END IF;
+
+/* create a dynamic sql statement that will update the records in the r_ interval
+   table  based on the passed in sdi and dates.                                    */
+
+
+   up_statement := 'update r_' || interval || ' set source_id = source_id where site_datatype_id = ' || to_char(site_datatype_id) ||
+   '  and date_time_loaded >= to_date(''' ||
+   to_char(start_time,'dd-MON-YYYY HH24:MI:SS') ||
+   ''',''dd-MON-YYYY HH24:MI:SS'')  and date_time_loaded <= to_date(''' ||
+   to_char(END_TIME,'dd-MON-YYYY HH24:MI:SS') ||
+   ''',''dd-MON-YYYY HH24:MI:SS'')';
+
+/*  insert into update_temp values (up_statement);  */
+commit;
+
+/* HDB_UTILITIES to set the manual edit to 'N'  */
+   indicator := hdb_utilities.set_manual_edit('N');
+
+/* now execute this dynamic sql statement */
+   execute immediate (up_statement);
+   rows_touched := SQL%ROWCOUNT;
+   /* error out if no rows were update!!!  */
+   IF rows_touched < 1 THEN
+     DENY_ACTION (procedure_indicator || ' SDI:  ' || to_char(site_datatype_id) || ' with '
+     || interval || ' INTERVAL and START DATE: ' || to_char(start_time) || ' Resulted in no rows update.');
+   END IF;
+
+/* finally do a commit since this procedure was successful and
+   a commit will reduce possible deadlock issues  */
+   commit;
+
+END; /*  touch_for_re_calculate_algo procedures  */
+
+
+
+
+
+
+   PROCEDURE RE_CALCULATE_ALGORITHM(
+    ALGORITHM_ID NUMBER,
+    INTERVAL         VARCHAR2,
+    START_TIME       DATE,
+    END_TIME       DATE
+    ) IS
+	procedure_indicator varchar2(100);
+	STATUS_TEMP varchar2(100);
+    temp_chars varchar2(30);
+    START_TIME_TEMP DATE;
+    END_TIME_TEMP DATE;
+    total_count NUMBER;
+    good_count NUMBER;
+    bad_count NUMBER;
+    ts_start DATE;
+    TS_END DATE;
+    db_timezone VARCHAR2(3);
+    time_zone VARCHAR2(3);
+
+    /* this is the cursor and the sql to get all sdi's that are input for an output sdi  */
+    CURSOR get_all_input_sdis(ALG_ID_IN NUMBER, INTERVAL_IN VARCHAR2, START_DATE_IN DATE) IS
+	select distinct castv.site_datatype_id, START_DATE_IN + (nvl(ccts2.DELTA_T,0)/86400) "TS_TIME",
+        ccts2.interval
+	from  cp_computation cc, cp_comp_ts_parm ccts, cp_algorithm ca, cp_comp_ts_parm ccts2,
+		  cp_algo_ts_parm catp, cp_active_sdi_tsparm_view castv
+	where
+		 cc.enabled = 'Y'
+	and  cc.loading_application_id is not null
+	and  cc.computation_id = ccts.computation_id
+	and  cc.algorithm_id = ca.algorithm_id
+	and  ca.algorithm_id = catp.algorithm_id
+	and  ca.algorithm_id = ALG_ID_IN
+	and  ccts.algo_role_name = catp.algo_role_name
+	and  catp.parm_type like 'o%'
+	and  ccts.interval = INTERVAL_IN
+	and  ccts.table_selector = 'R_'
+	and  ccts2.computation_id = ccts.computation_id
+	and  castv.site_datatype_id = ccts2.site_datatype_id
+	and  castv.computation_id = cc.computation_id;
+
+/*	and  castv.site_datatype_id = 1536;  /*temp in here for testing  */
+
+ BEGIN
+/*  This procedure was written to assist in "calculating" a record in HDB
+    via the application UC_CP_FIX and may be called separately so that the
+    real interval records that are inputs to a calculation would
+    appear to have been modified and hence, spawn any computations
+    that would result in the passed SDI as output.
+
+    this procedure written by Mark Bogner   November 2008                   */
+
+/*  Modified by M.  Bogner  06/01/2009 to add mods to accept different time_zone parameter */
+
+	procedure_indicator := 'CALCULATE_ALGORITHM FAILED FOR: ';
+/*  first do error checking  */
+    IF ALGORITHM_ID IS NULL THEN
+		DENY_ACTION( procedure_indicator || 'INVALID <NULL> ALGORITHM_ID');
+	ELSIF INTERVAL IS NULL THEN
+		DENY_ACTION( procedure_indicator || 'INVALID <NULL> INTERVAL');
+	ELSIF START_TIME IS NULL THEN
+		DENY_ACTION( procedure_indicator || 'INVALID <NULL> START_TIME');
+    END IF;
+
+/* get the databases default time zone  */
+    BEGIN
+      select param_value into db_timezone
+        from ref_db_parameter, global_name
+        where param_name = 'TIME_ZONE'
+        and global_name.global_name = ref_db_parameter.global_name
+        and nvl(active_flag,'Y') = 'Y';
+       exception when others then
+       db_timezone := NULL;
+    END;
+
+/* validate the interval via a select from the hdb_interval table  */
+    BEGIN
+      select interval_name into temp_chars
+        from hdb_interval
+        where interval_name = interval;
+       exception when others then
+       DENY_ACTION( procedure_indicator || 'INVALID ' || interval || ' INTERVAL');
+    END;
+
+/*  if end time was passed in null or used default null then set to start_time  */
+/*  commented out since we will not support a series of time
+	END_TIME_TEMP := END_TIME;
+	IF END_TIME IS NULL THEN
+	  END_TIME_TEMP := START_TIME;
+	END IF;
+*/
+
+	start_time_temp := START_TIME;
+/* now convert the start_time to the database time if different, both exist,
+   and only for the instantaneous and hourly interval           */
+    IF (TIME_ZONE <> db_timezone AND INTERVAL in ('instant','hour')) THEN
+       start_time_temp:= new_time(start_time_temp,TIME_ZONE,db_timezone);
+    END IF;
+
+	/* now loop through all sdi's that are inputs and "touch" them all */
+	/* not just one SDI since we can't be sure all records for a single sdi
+	   are there for the whole specified time period, without a whole
+	   bunch of processing and checking counts etc...                 */
+	bad_count := 0;
+	good_count := 0;
+	total_count := 0;
+	procedure_indicator := ' FAILED ';
+
+	/* loop through all the input sdis to touch them for a recomputation  */
+	FOR p1 IN get_all_input_sdis(ALGORITHM_ID, INTERVAL, START_TIME_TEMP) LOOP
+		BEGIN
+			total_count := total_count + 1;
+			TS_START := p1.TS_TIME;
+			/* standardize the dates for result sdi based on input sdi start_date_time  */
+			/*hdb_utilities.standardize_dates( SITE_DATATYPE_ID,INTERVAL, TS_START, TS_END); */
+			/* now touch based on standardize dates for input interval in case the intervals don't coincide  */
+/*insert into update_temp values (to_char(p1.SITE_DATATYPE_ID)|| '   ' || p1.INTERVAL);*/
+commit;
+
+			touch_for_re_calculate_algo(p1.SITE_DATATYPE_ID, p1.INTERVAL, START_TIME, END_TIME);
+			good_count := good_count + 1;
+			procedure_indicator := ' SUCCEEDED ';
+			exception when others then
+				/*deny_action(sqlerrm);  */
+				bad_count := bad_count + 1;
+		END;
+
+	END LOOP;
+
+  /* if the good_count is still zero then throw failed exception and how many SDIs were touched */
+    IF (good_count = 0) THEN
+		DENY_ACTION( 'CALCULATE_SERIES Procedure COMPLETED and' || procedure_indicator || ' for: '
+		|| to_char(total_count) || ' Input SDIs with '
+		|| interval || ' INTERVAL and START DATE: ' || to_char(start_time_temp,'dd-mon-yyyy HH24:mi'));
+	END IF;
+
+  END; /*  CALCULATE_SERIES procedure  */
+
+
 END HDB_UTILITIES; 
 .
 /

@@ -4,6 +4,7 @@ spool hdb_types.out
 
 start ./TYPES/date_object.ddl;
 start ./TYPES/date_array.ddl;
+start ./TYPES/hdb4_types.ddl;
 
 spool off
 exit;

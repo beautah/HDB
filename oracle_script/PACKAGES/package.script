@@ -24,6 +24,11 @@ start ./PACKAGES/snapshot_manager.spb
 --  packages added for ensemble
 start ./PACKAGES/ensemble.sps
 start ./PACKAGES/ensemble.spb
+-- datatype package
+start ./PACKAGES/datatype_pkg.sps
+-- TS_XFER packages added
+start ./PACKAGES/ts_xfer.sps
+start ./PACKAGES/ts_xfer.spb
 
 
 

@@ -23,6 +23,8 @@ declare
   text               varchar2(200);
 begin
 
+  /* Modified by kcavalier 29-APR-2016: Moved Validation and Data Flag Checking Code into MODIFY_R_BASE_RAW */
+  
    if not (DBMS_SESSION.Is_Role_Enabled ('SAVOIR_FAIRE')) then
       check_sdi_auth (:new.site_datatype_id);
    end if;
@@ -31,11 +33,6 @@ begin
       text := 'No future dates allowed in r_base tables';
       deny_action(text);
    end if;
-  
-  if :new.validation in ('E','+','-','w','n','|','^','~',chr(32)) then
-     :new.data_flags := :new.validation || substr(:new.data_flags,1,19);
-     :new.validation := NULL;
-  end if;
   
   /* logic below added to attempt to foil Stored Procedures non-utilization  */
   if :new.date_time_loaded <> to_date('10-DEC-1815','dd-MON-yyyy') then
@@ -115,18 +112,6 @@ begin
        deny_action(text);
     end if;
 
-  end if;
-  
---  now validate the record before it goes into the table
---  old logic for validation removed because of business rule that modify_r_base_RAW will be used always
---  if (INSERTING and nvl(:new.validation,'Z') in ('Z')) or UPDATING then 
-  if (nvl(:new.validation,'Z') in ('Z')) then 
-    hdb_utilities.validate_r_base_record
-      (:new.site_datatype_id,
-       :new.interval,
-       :new.start_date_time,
-       :new.value,
-       :new.validation);
   end if;
   
 end;

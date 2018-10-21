@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE BODY ratings
+CREATE OR REPLACE PACKAGE BODY RATINGS 
 AS
 
   PROCEDURE create_site_rating(indep_site_datatype_id IN NUMBER,
@@ -29,6 +29,7 @@ AS
       agen_id, description);
 
   END create_site_rating;
+
 
   PROCEDURE delete_rating_points(rating_in NUMBER)
   AS
@@ -126,7 +127,7 @@ AS
   indep_value IN NUMBER,
   x1 OUT NUMBER,
   x2 OUT NUMBER,
-  y1 OUT NUMBER, 
+  y1 OUT NUMBER,
   y2 OUT NUMBER,
   match_check OUT nocopy VARCHAR2)
   AS
@@ -235,7 +236,7 @@ AS
   rating ref_site_rating.rating_id%TYPE;
   duprating ref_site_rating.rating_id%TYPE;
   v_count NUMBER;
-  
+
   CURSOR c1 IS
   SELECT rating_id
   INTO rating
@@ -275,7 +276,7 @@ AS
         CLOSE c1;
         RETURN rating;
       ELSE
-        /* more than one match!*/ 
+        /* more than one match!*/
         CLOSE c1;
         deny_action('More than one rating matched input!');
         RETURN NULL;
@@ -367,10 +368,24 @@ AS
     END IF;
 
     BEGIN
+   
+  -- This first outer IF statement added by Ismail Ozdemir on 08/20/2010
+  -- to check if the shiftedGH <=0 , the flow is 0.  
+  -- Another if statement to check unshifted GH=0 then flow=0 is 
+  -- added in uc_algorithms.jar file
+  
+ IF(indep_value <= 0) THEN
+ dep_value :=0;
+ ELSE
       find_rating_points(rating_in,
       indep_value, x1, x2, y1, y2, match_check);
 
       indep_base := x1;
+      
+      IF (y1 = 0 OR y2 = 0 or x1 = 0 or x2 = 0 OR indep_value = 0) THEN
+        deny_action('Unable to complete logarithmic rating for rating ' ||
+      rating_in || ', rating points = 0 are not usable in logarithmic rating, value ' || indep_value);
+      END IF;
 
       IF(match_check = 'E') THEN
         dep_value := y1;
@@ -385,7 +400,8 @@ AS
 
         dep_value := POWER(10,   y1 + dy / dx *(x -x1));
       END IF;
-
+ END IF;
+    
     EXCEPTION
     WHEN others THEN
       deny_action('Unable to complete logarithmic rating for rating ' ||
@@ -402,7 +418,7 @@ AS
   match_check OUT nocopy VARCHAR2)
   AS
   BEGIN
-  
+
     IF(rating_in IS NULL) THEN
       deny_action('Invalid <NULL> rating_id');
     END IF;
@@ -454,6 +470,11 @@ AS
       find_rating_points(rating_in,
       indep_value, x1, x2, y1, y2, match_check);
 
+      IF (x1 = 0 or x2 = 0 or indep_value = 0) THEN
+        deny_action('Unable to complete logarithmic rating for rating ' ||
+      rating_in || ', rating points = 0 are not usable in logarithmic rating, value ' || indep_value);
+      END IF;
+      
       indep_base := x1;
 
       IF(match_check = 'E') THEN
@@ -488,7 +509,7 @@ AS
    Do a lookup rating with this rating table.
    See if a rating exists for the time period after this rating id.
    If it does exist, then perform a lookup rating with that table.
-   Interpolate between the two results in time, and return that value 
+   Interpolate between the two results in time, and return that value
   */
   sdi ref_site_rating.indep_site_datatype_id%type;
   rating ref_site_rating.rating_type_common_name%type;
@@ -503,21 +524,21 @@ AS
   BEGIN
 
     rating_lookup(rating_in,indep_value,indep_date,indep_base,dep_value,match_check);
-    
+
     /*find information about this rating */
     select indep_site_datatype_id, rating_type_common_name,
       effective_start_date_time,effective_end_date_time
     into sdi, rating, sdate, edate
-    from ref_site_rating 
+    from ref_site_rating
     where rating_id = rating_in;
-    
+
     if indep_date <sdate or indep_date >= edate then
       deny_action ('Date for time interpolated rating is not within effective range
         for rating id '|| rating_in);
     end if;
-    
+
     /* find rating id for values after we end (our end date or later) */
-    select find_site_rating(rating,sdi,edate) 
+    select find_site_rating(rating,sdi,edate)
     into after_rating
     from dual;
 
@@ -533,21 +554,21 @@ AS
         exception when no_data_found then
           deny_action('Rating '|| after_rating ||' does not have expected start_time, cannot complete time interpolation!');
       end;
-      
+
       /* do a rating in the rating table after us */
       rating_lookup(after_rating,indep_value,indep_date,indep_base,after_dep_value,match_check);
-    
+
       /* now interpolate */
       y1:=dep_value;
       y2:=after_dep_value;
       x1:=sdate;
       x2:=edate;
-    
+
       IF (indep_date = sdate) THEN
         dep_value := y1;
       ELSE
         dep_value := y1 + (y2 -y1)/(x2 -x1)*(indep_date -x1);
-      END IF; 
+      END IF;
     /* else no rating found after us, we just use the first result. */
     end if;
 
@@ -564,7 +585,7 @@ AS
    Do a linear rating with this table.
    See if a rating exists for the time period after this rating id.
    If it does exist, then perform a linear rating with that table.
-   Interpolate between the two results in time, and return that value 
+   Interpolate between the two results in time, and return that value
   */
   sdi ref_site_rating.indep_site_datatype_id%type;
   rating ref_site_rating.rating_type_common_name%type;
@@ -579,21 +600,21 @@ AS
   BEGIN
 
     rating_linear(rating_in,indep_value,indep_date,indep_base,dep_value,match_check);
-    
+
     /*find information about this rating */
     select indep_site_datatype_id, rating_type_common_name,
       effective_start_date_time,effective_end_date_time
     into sdi, rating, sdate, edate
-    from ref_site_rating 
+    from ref_site_rating
     where rating_id = rating_in;
-    
+
     if indep_date <sdate or indep_date >= edate then
       deny_action ('Date for time interpolated rating is not within effective range
         for rating id '|| rating_in);
     end if;
-    
+
     /* find rating id for values after we end (our end date or later) */
-    select find_site_rating(rating,sdi,edate) 
+    select find_site_rating(rating,sdi,edate)
     into after_rating
     from dual;
 
@@ -610,21 +631,21 @@ AS
         exception when no_data_found then
           deny_action('Rating '|| after_rating ||' does not have expected start_time, cannot complete time interpolation!');
       end;
-      
+
       /* do a rating in the rating table after us */
       rating_linear(after_rating,indep_value,indep_date,indep_base,after_dep_value,match_check);
-    
+
       /* now interpolate */
       y1:=dep_value;
       y2:=after_dep_value;
       x1:=sdate;
       x2:=edate;
-    
+
       IF (indep_date = sdate) THEN
         dep_value := y1;
       ELSE
         dep_value := y1 + (y2 -y1)/(x2 -x1)*(indep_date -x1);
-      END IF; 
+      END IF;
     /* else no rating found after us, we just use the first result. */
     end if;
 

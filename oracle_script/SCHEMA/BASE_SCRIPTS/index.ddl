@@ -52,6 +52,7 @@ tablespace hdb_idx
 storage(initial 64k next 100k pctincrease 0)   
 ;
 
+
 spool off
 exit;
 

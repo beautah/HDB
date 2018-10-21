@@ -20,5 +20,9 @@ start ./FUNCTIONS/GET_HDB_SITE_COMMON_NAME.func
 start ./FUNCTIONS/GET_HDB_SITE_NAME.func
 start ./FUNCTIONS/GET_PK_VAL_WRAP.func
 start ./FUNCTIONS/GSNA.func
+start ./FUNCTIONS/timesteps_between.func
+start ./FUNCTIONS/GET_TS_XFER_DATA.func
+start ./FUNCTIONS/get_min_max_annotation.func
+start ./FUNCTIONS/find_rating.func
 spool off
 exit;

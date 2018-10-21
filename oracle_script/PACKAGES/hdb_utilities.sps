@@ -9,6 +9,7 @@ create or replace package HDB_UTILITIES as
     Modified October 2011 by M. Bogner to add Version II Access Control List Functionality
     Modified May 2012 by M. Bogner to fix  validation and overwrite flag bug not working in other time zone
     Modified July 2012 by M. Bogner  to add requirement for CP to store all data_time loaded values in same TZ
+    Modified Feb 2016 by Ismail Ozdemir  to add RE_CALCULATE_ALGORITHM Procedure
 */
 
 /*  DECLARE ALL GLOBAL variables  */
@@ -68,6 +69,16 @@ create or replace package HDB_UTILITIES as
     P_DELETE_FLAG VARCHAR2 DEFAULT 'N');   
 
   PROCEDURE MODIFY_SITE_GROUP_NAME(P_SITE_ID NUMBER, P_GROUP_NAME VARCHAR2, P_DELETE_FLAG VARCHAR2 DEFAULT 'N');   
+
+  /*  PROCEDURE RE_CALCULATE_ALGORITHM designed to contain all
+      the procedures and functions to recalculate a whole slew of
+      data that are outputs to calculations if they were wrongly calculated in the first place.
+  
+      Created by M. Bogner September 2009
+  */  
+  
+    PROCEDURE RE_CALCULATE_ALGORITHM(ALGORITHM_ID NUMBER, INTERVAL VARCHAR2, START_TIME DATE, END_TIME DATE);
+
 
 END HDB_UTILITIES;
 .

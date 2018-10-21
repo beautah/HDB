@@ -47,7 +47,7 @@ BEGIN
 	  from ref_source_priority
 	 where site_datatype_id = SITE_DATATYPE_ID_IN
 	   and agen_id = AGEN_ID_IN;
- 	exception when others THEN null; /*not an error to not have entry for this agency and sdi*/
+ 	exception when others THEN new_priority := 0; /*not an error to not have entry for this agency and sdi*/
     end;
 
     begin /* get the old foreign keys and priorities */
@@ -112,14 +112,14 @@ BEGIN
    validation code may have changed via validation. This modification done 22 May 2008 to fix
    issues where we were updating r_base but the only reason was we previously validated, or moved the 
    hydromet codes to the data_flags column when really the exact same input data was received  */
-   
+/*   
   IF ( do_update 
        and abs(old_value - value_in) <= epsilon
        and NOT data_changed 
        and nvl(validation_in,'x') in ('Z','E','+','-','w','n','|','^','~','x')
        and old_validation in ('V','F','L','H','x'))  THEN
      do_update := false;
-  END IF;   
+  END IF;*/   
 
   /* after all the checks above then do update if do_update boolean is still true  */
   IF (do_update) THEN

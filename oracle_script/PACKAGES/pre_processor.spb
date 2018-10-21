@@ -22,7 +22,10 @@ CREATE OR REPLACE PACKAGE BODY PRE_PROCESSOR AS
     so that the pre-processing can re-calculate an input value based on a user defined
     equation
     
-    this procedure written by Mark Bogner   October 2008          */
+    this procedure written by Mark Bogner   October 2008         
+    sysdate replaced with start_time in equation statement by CarolM. August 2017
+
+*/
    
 	procedure_indicator := 'PREPROCESSOR FAILED FOR: ';
 /*  first do error checking  */
@@ -65,7 +68,8 @@ CREATE OR REPLACE PACKAGE BODY PRE_PROCESSOR AS
 		/* we have an equation , so do some substitution  */
 		equation_stmt := replace(equation_stmt,'<<value>>',to_char(round(result,7)));	
 		equation_stmt := replace(equation_stmt,'<<tsbt>>','to_date(''' || 
-		to_char(sysdate,'dd-mon-yyyy hh24:mi:ss') || ''',''dd-mon-yyyy hh24:mi:ss'')');
+	-- sysdate replaced with start_time
+		to_char(start_time,'dd-mon-yyyy hh24:mi:ss') || ''',''dd-mon-yyyy hh24:mi:ss'')');
 		sql_stmt := 'select ' || equation_stmt || ' from dual';
 
 	BEGIN

@@ -16,7 +16,7 @@ create or replace FUNCTION SENDMAIL(
                       recipients => P_ADDRESS,
                       subject => l_subject, 
                       message => P_TEXT );		
-		exception when others then l_return_value := -1;
+		exception when others then l_return_value := sqlcode();
 		end;
 		
 	   return (l_return_value);
