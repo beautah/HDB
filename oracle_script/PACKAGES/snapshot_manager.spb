@@ -19,7 +19,10 @@ CREATE OR REPLACE PACKAGE BODY SNAPSHOT_MANAGER AS
 		DENY_ACTION(l_procedure_indicator || 'INVALID <NULL> TABLE_NAME');
     END IF;
 	
-	/* insert the tablename into the generic database list table  */	INSERT INTO REF_DB_GENERIC_LIST (RECORD_KEY, RECORD_KEY_VALUE1) VALUES    (G_SNAPSHOT_MANAGER_KEY, UPPER(P_TABLE_NAME));	
+	/* insert the tablename into the generic database list table  */
+	INSERT INTO REF_DB_GENERIC_LIST (RECORD_KEY, RECORD_KEY_VALUE1) VALUES
+    (G_SNAPSHOT_MANAGER_KEY, UPPER(P_TABLE_NAME));
+	
   END; /*  snapshot_modified procedure  */
 
   PROCEDURE PERFORM_REFRESH(P_TABLE_NAME VARCHAR2)
@@ -43,7 +46,7 @@ CREATE OR REPLACE PACKAGE BODY SNAPSHOT_MANAGER AS
     IF UPPER(P_TABLE_NAME) = 'ALL' THEN 
       l_table_names := 'ALL';
      ELSIF P_TABLE_NAME = '%' THEN
-      select wm_concat(table_name) into l_table_names from
+      select listagg(table_name, ',') WITHIN GROUP (ORDER BY table_name) into l_table_names from 
       (select distinct record_key_value1 "TABLE_NAME" from ref_db_generic_list 
        where record_key = G_SNAPSHOT_MANAGER_KEY);       
      ELSE l_table_names := P_TABLE_NAME;
